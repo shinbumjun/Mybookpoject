@@ -46,7 +46,7 @@ public class BookRepository {
 	@GetMapping("/books.do")
 	public ModelAndView getAllBooks() {
 		ModelAndView mv = new ModelAndView();
-		// commit한번 해보기
+		// commit한번 해보기2
 		mv.addObject("listOfBooks", listOfBooks);
 		mv.setViewName("books");
 		return mv;
