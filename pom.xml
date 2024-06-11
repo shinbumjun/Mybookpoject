@@ -42,6 +42,12 @@
 		    <artifactId>logback-core</artifactId>
 		    <version>1.4.14</version>
 		</dependency>
+		<!-- commons-fileupload 의존성 추가 -->
+	    <dependency>
+	        <groupId>commons-fileupload</groupId>
+	        <artifactId>commons-fileupload</artifactId>
+	        <version>1.4</version>
+	    </dependency>
 	
   </dependencies>
   

@@ -4,109 +4,124 @@ import java.io.Serializable;
 
 public class Book implements Serializable {
 
-	private static final long serialVersionUID = -4274700572038677000L;
+    private static final long serialVersionUID = -4274700572038677000L;
 
-	private String bookId; 		    //µµº≠ ID
-	private String name;		    //µµº≠∏Ì
-	private int  unitPrice; 	    //∞°∞›
-	private String author;			//¿˙¿⁄
-	private String description; 	//º≥∏Ì
-	private String publisher;	    //√‚∆«ªÁ
-	private String category; 		//∫–∑˘
-	private long   unitsInStock; 	//¿Á∞Ì∞≥ºˆ
-	private String releaseDate;   //√‚∆«¿œ(ø˘/≥‚)
-	private String condition; 		//Ω≈¡¶«∞ or ±∏¡¶«∞ or ∏Æ∆€∫Í¡¶«∞
-	
+    private String bookId;          // ÎèÑÏÑú ID
+    private String name;            // ÎèÑÏÑúÎ™Ö
+    private int unitPrice;          // Í∞ÄÍ≤©
+    private String author;          // Ï†ÄÏûê
+    private String description;     // ÏÑ§Î™Ö
+    private String publisher;       // Ï∂úÌåêÏÇ¨
+    private String category;        // Î∂ÑÎ•ò
+    private long unitsInStock;      // Ïû¨Í≥†Ïàò
+    private String releaseDate;     // Ï∂úÌåêÏùº
+    private String condition;       // ÏÉÅÌÉú(New, Old, EBook)
+    private String imageUrl;        // Ïù¥ÎØ∏ÏßÄ URL Ï∂îÍ∞Ä
 
-	public Book() {
-		super();
-}
+    public Book() {
+        super();
+    }
 
-	public Book(String bookId, String name, Integer unitPrice) {
-		this.bookId = bookId;
-		this.name = name;
-		this.unitPrice = unitPrice;
-	}
+    public Book(String bookId, String name, Integer unitPrice) {
+        this.bookId = bookId;
+        this.name = name;
+        this.unitPrice = unitPrice;
+    }
 
-	public String getBookId() {
-		return bookId;
-	}
+    // GetterÏôÄ Setter Î©îÏÜåÎìú Ï∂îÍ∞Ä
+    public String getBookId() {
+        return bookId;
+    }
 
-	public void setBookId(String bookId) {
-		this.bookId = bookId;
-	}
+    public void setBookId(String bookId) {
+        this.bookId = bookId;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public int getUnitPrice() {
-		return unitPrice;
-	}
+    public int getUnitPrice() {
+        return unitPrice;
+    }
 
-	public void setUnitPrice(int unitPrice) {
-		this.unitPrice = unitPrice;
-	}
+    public void setUnitPrice(int unitPrice) {
+        this.unitPrice = unitPrice;
+    }
 
-	public String getAuthor() {
-		return author;
-	}
+    public String getAuthor() {
+        return author;
+    }
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public String getPublisher() {
-		return publisher;
-	}
+    public String getPublisher() {
+        return publisher;
+    }
 
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
-	}
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
 
-	public String getCategory() {
-		return category;
-	}
+    public String getCategory() {
+        return category;
+    }
 
-	public void setCategory(String category) {
-		this.category = category;
-	}
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
-	public long getUnitsInStock() {
-		return unitsInStock;
-	}
+    public long getUnitsInStock() {
+        return unitsInStock;
+    }
 
-	public void setUnitsInStock(long unitsInStock) {
-		this.unitsInStock = unitsInStock;
-	}
+    public void setUnitsInStock(long unitsInStock) {
+        this.unitsInStock = unitsInStock;
+    }
 
-	public String getReleaseDate() {
-		return releaseDate;
-	}
+    public String getReleaseDate() {
+        return releaseDate;
+    }
 
-	public void setReleaseDate(String releaseDate) {
-		this.releaseDate = releaseDate;
-	}
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
 
-	public String getCondition() {
-		return condition;
-	}
+    public String getCondition() {
+        return condition;
+    }
 
-	public void setCondition(String condition) {
-		this.condition = condition;
-	}
+    public void setCondition(String condition) {
+        this.condition = condition;
+    }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
 
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "Book [bookId=" + bookId + ", name=" + name + ", unitPrice=" + unitPrice + ", author=" + author
+                + ", description=" + description + ", publisher=" + publisher + ", category=" + category
+                + ", unitsInStock=" + unitsInStock + ", releaseDate=" + releaseDate + ", condition=" + condition
+                + ", imageUrl=" + imageUrl + "]";
+    }
 }

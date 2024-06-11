@@ -13,6 +13,10 @@
 	        int m = (Integer) request.getAttribute("m");
 	        out.print("컨트롤러에서 데이터 전달 받음 5의 3제곱 : " + m);
 	    %>
-	   <a href="./books.do">북으로 이동</a>
+	    
+	   <a href="./login.do">로그인</a>
+	   <a href="./form01.do">회원가입</a>
+	   <a href="./Fileupload01.do">파일 업로드</a>
+
 </body>
 </html>

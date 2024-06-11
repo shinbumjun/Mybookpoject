@@ -1,54 +1,139 @@
 package com.bum.jun;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dto.Book;
 
 @Controller
+@Component
 public class BookRepository {
 	
-	private ArrayList<Book> listOfBooks = new ArrayList<Book>();
+    // private List<Book> listOfBooks = new ArrayList<>();
+	private static List<Book> listOfBooks = new ArrayList<>();
 	
-	public BookRepository() {
-		Book book1 = new Book("ISBN1234", "C# ÇÁ·Î±×·¡¹Ö", 27000);
-		book1.setAuthor("¿ìÀç³²");
-		book1.setDescription("C#À» Ã³À½ Á¢ÇÏ´Â µ¶ÀÚ¸¦ ´ë»óÀ¸·Î ÀÏ´ëÀÏ ¼ö¾÷Ã³·³ ÀÚ¼¼È÷ ¼³¸íÇÑ Ã¥ÀÌ´Ù. ²À ¾Ë¾Æ¾ß ÇÒ ÇÙ½É °³³äÀº ±âº» ¿¹Á¦·Î ÃÖ´ëÇÑ ½±°Ô ¼³¸íÇßÀ¸¸ç, Áß¿äÇÑ ³»¿ëÀº ÀÀ¿ë ¿¹Á¦, ÄûÁî, ¼¿ÇÁ ½ºÅÍµğ, ¿¹Á¦ ¸ğÀ½À¸·Î ÇÑ¹ø ´õ º¹½ÀÇÒ ¼ö ÀÖ´Ù.");
-		book1.setPublisher("ÇÑºû¾ÆÄ«µ¥¹Ì");
-		book1.setCategory("IT¸ğ¹ÙÀÏ");
-		book1.setUnitsInStock(1000);
-		book1.setReleaseDate("2022/10/06");
+    public BookRepository() {
+        // ì±… ëª©ë¡ ìƒì„± ë° ëª¨ë¸ì— ì¶”ê°€
+        Book book1 = new Book("ISBN1234", "C# í”„ë¡œê·¸ë˜ë°", 27000);
+        book1.setAuthor("ìš°ì¬ë‚¨");
+        book1.setDescription("C#ì„ ì²˜ìŒ ì ‘í•˜ëŠ” ë…ìë¥¼ ëŒ€ìƒìœ¼ë¡œ ì¼ëŒ€ì¼ ìˆ˜ì—…ì²˜ëŸ¼ ìì„¸íˆ ì„¤ëª…í•œ ì±…ì´ë‹¤. ê¼­ ì•Œì•„ì•¼ í•  í•µì‹¬ ê°œë…ì€ ê¸°ë³¸ ì˜ˆì œë¡œ ìµœëŒ€í•œ ì‰½ê²Œ ì„¤ëª…í–ˆìœ¼ë©°, ì¤‘ìš”í•œ ë‚´ìš©ì€ ì‘ìš© ì˜ˆì œ, í€´ì¦ˆ, ì…€í”„ ìŠ¤í„°ë””, ì˜ˆì œ ëª¨ìŒìœ¼ë¡œ í•œë²ˆ ë” ë³µìŠµí•  ìˆ˜ ìˆë‹¤.");
+        book1.setPublisher("í•œë¹›ì•„ì¹´ë°ë¯¸");
+        book1.setCategory("ITëª¨ë°”ì¼");
+        book1.setUnitsInStock(1000);
+        book1.setReleaseDate("2022/10/06");
+        book1.setImageUrl("./resources/images/prod1.jpg"); // ë¡œì»¬ ì´ë¯¸ì§€ URL ì„¤ì •
 
-		Book book2 = new Book("ISBN1235", "ÀÚ¹Ù¸¶½ºÅÍ", 30000);
-		book2.setAuthor("¼Û¹Ì¿µ");
-		book2.setDescription("ÀÚ¹Ù¸¦ Ã³À½ ¹è¿ì´Â ÇĞ»ıÀ» À§ÇØ ÀÚ¹ÙÀÇ ±âº» °³³ä°ú ½Ç½À ¿¹Á¦¸¦ ±×¸²À» ÀÌ¿ëÇÏ¿© ½±°Ô ¼³¸íÇÕ´Ï´Ù. ÀÚ¹ÙÀÇ ÀÌ·ĞÀû °³³ä¡æ±âº» ¿¹Á¦¡æÇÁ·ÎÁ§Æ® ¼øÀ¸·Î ´Ü°èº° ÇĞ½ÀÀÌ °¡´ÉÇÏ¸ç, °¢ Ã©ÅÍÀÇ ÇÁ·ÎÁ§Æ®¸¦ ½Ç½ÀÇÏ¸é¼­ ¿Â¶óÀÎ ¼­Á¡À» ¿Ï¼ºÇÒ ¼ö ÀÖµµ·Ï ±¸¼ºÇÏ¿´½À´Ï´Ù.");
-		book2.setPublisher("ÇÑºû¾ÆÄ«µ¥¹Ì");
-		book2.setCategory("IT¸ğ¹ÙÀÏ");
-		book2.setUnitsInStock(1000);
-		book2.setReleaseDate("2023/01/01");
+        Book book2 = new Book("ISBN1235", "ìë°”ë§ˆìŠ¤í„°", 30000);
+        book2.setAuthor("ì†¡ë¯¸ì˜");
+        book2.setDescription("ìë°”ë¥¼ ì²˜ìŒ ë°°ìš°ëŠ” í•™ìƒì„ ìœ„í•´ ìë°”ì˜ ê¸°ë³¸ ê°œë…ê³¼ ì‹¤ìŠµ ì˜ˆì œë¥¼ ê·¸ë¦¼ì„ ì´ìš©í•˜ì—¬ ì‰½ê²Œ ì„¤ëª…í•©ë‹ˆë‹¤. ìë°”ì˜ ì´ë¡ ì  ê°œë…â†’ê¸°ë³¸ ì˜ˆì œâ†’í”„ë¡œì íŠ¸ ìˆœìœ¼ë¡œ ë‹¨ê³„ë³„ í•™ìŠµì´ ê°€ëŠ¥í•˜ë©°, ê° ì±•í„°ì˜ í”„ë¡œì íŠ¸ë¥¼ ì‹¤ìŠµí•˜ë©´ì„œ ì˜¨ë¼ì¸ ì„œì ì„ ì™„ì„±í•  ìˆ˜ ìˆë„ë¡ êµ¬ì„±í•˜ì˜€ìŠµë‹ˆë‹¤.");
+        book2.setPublisher("í•œë¹›ì•„ì¹´ë°ë¯¸");
+        book2.setCategory("ITëª¨ë°”ì¼");
+        book2.setUnitsInStock(1000);
+        book2.setReleaseDate("2023/01/01");
+        book2.setImageUrl("./resources/images/prod2.jpg"); // ë¡œì»¬ ì´ë¯¸ì§€ URL ì„¤ì •
 
-		Book book3 = new Book("ISBN1236", "ÆÄÀÌ½ã ÇÁ·Î±×·¡¹Ö", 30000);
-		book3.setAuthor("ÃÖ¼ºÃ¶");
-		book3.setDescription("ÆÄÀÌ½ãÀ¸·Î ÇÁ·Î±×·¡¹ÖÀ» ½ÃÀÛÇÏ´Â ÀÔ¹®ÀÚ°¡ ½±°Ô ÀÌÇØÇÒ ¼ö ÀÖµµ·Ï ±âº» °³³äÀ» »ó¼¼ÇÏ°Ô ¼³¸íÇÏ¸ç, ´Ù¾çÇÑ ¿¹Á¦¸¦ Á¦½ÃÇÕ´Ï´Ù. ¶ÇÇÑ ÇÁ·Î±×·¡¹ÖÀÇ ±âÃÊ ¿ø¸®¸¦ ÀÌÇØÇÏ¸é¼­ ÆÄÀÌ½ãÀ¸·Î µ¥ÀÌÅÍ¸¦ Ã³¸®ÇÏ´Â ±â¹ıµµ ¹è¿ó´Ï´Ù.");
-		book3.setPublisher("ÇÑºû¾ÆÄ«µ¥¹Ì");
-		book3.setCategory("IT¸ğ¹ÙÀÏ");
-		book3.setUnitsInStock(1000);
-		book3.setReleaseDate("2023/01/01");
+        Book book3 = new Book("ISBN1236", "íŒŒì´ì¬ í”„ë¡œê·¸ë˜ë°", 30000);
+        book3.setAuthor("ìµœì„±ì² ");
+        book3.setDescription("íŒŒì´ì¬ìœ¼ë¡œ í”„ë¡œê·¸ë˜ë°ì„ ì‹œì‘í•˜ëŠ” ì…ë¬¸ìê°€ ì‰½ê²Œ ì´í•´í•  ìˆ˜ ìˆë„ë¡ ê¸°ë³¸ ê°œë…ì„ ìƒì„¸í•˜ê²Œ ì„¤ëª…í•˜ë©°, ë‹¤ì–‘í•œ ì˜ˆì œë¥¼ ì œì‹œí•©ë‹ˆë‹¤. ë˜í•œ í”„ë¡œê·¸ë˜ë°ì˜ ê¸°ì´ˆ ì›ë¦¬ë¥¼ ì´í•´í•˜ë©´ì„œ íŒŒì´ì¬ìœ¼ë¡œ ë°ì´í„°ë¥¼ ì²˜ë¦¬í•˜ëŠ” ê¸°ë²•ë„ ë°°ì›ë‹ˆë‹¤.");
+        book3.setPublisher("í•œë¹›ì•„ì¹´ë°ë¯¸");
+        book3.setCategory("ITëª¨ë°”ì¼");
+        book3.setUnitsInStock(1000);
+        book3.setReleaseDate("2023/01/01");
+        book3.setImageUrl("./resources/images/prod3.jpg"); // ë¡œì»¬ ì´ë¯¸ì§€ URL ì„¤ì •
 
-		listOfBooks.add(book1);
-		listOfBooks.add(book2);
-		listOfBooks.add(book3);
-	}
+        listOfBooks.add(book1);
+        listOfBooks.add(book2);
+        listOfBooks.add(book3);
+    }
+
+    // ì±… ëª©ë¡ì„ ê°€ì ¸ì˜¤ëŠ” ë©”ì†Œë“œ
+    public List<Book> getAllBooks() {
+    	System.out.println("555555555555555555555 : " + listOfBooks);
+        return listOfBooks;
+    }
+
+    // ì±…ì„ ì¶”ê°€í•˜ëŠ” ë©”ì†Œë“œ
+    public void addBook(Book book) {
+        listOfBooks.add(book);
+    }
 
 	@GetMapping("/books.do")
-	public ModelAndView getAllBooks() {
+	public ModelAndView getAllBooks1() {
 		ModelAndView mv = new ModelAndView();
-		// commitÇÑ¹ø ÇØº¸±â2
+		// commití•œë²ˆ í•´ë³´ê¸°2
 		mv.addObject("listOfBooks", listOfBooks);
 		mv.setViewName("books");
 		return mv;
 	}
+	
+	/**
+	 * bookId ë„ì„œì½”ë“œ
+	 * name ë„ì„œëª…
+	 * unitPrice ê°€ê²©
+	 * author ì €ì
+	 * publisher ì¶œíŒì‚¬
+	 * releaseDate ì¶œíŒì¼ 
+	 * description ìƒì„¸ì •ë³´
+	 * category ë¶„ë¥˜
+	 * unitsInStock ì¬ê³ ìˆ˜ 
+	 * condition ìƒíƒœ(New, Old, EBook)
+	 * 
+	 * Book Dto ìƒì„±
+	 * 
+	 * @return ì‹ ë²”ì¤€
+	 */
+	@PostMapping("/processAddBook.do")
+	public ModelAndView processAddBook(@ModelAttribute Book newBook) {
+		// ìƒˆë¡œìš´ ì±…ì„ ëª©ë¡ì— ì¶”ê°€
+	    listOfBooks.add(newBook);
+	    
+	    System.out.println("@@@@@@ì¶”ê°€ ë°ì´í„°@@@@@@" + newBook); // ok
+	    System.out.println("@@@@@@ì „ì²´ ë°ì´í„°@@@@@@" + listOfBooks); 
+	    
+	    // ëª©ë¡ì„ ëª¨ë¸ì— ë‹´ì•„ì„œ books.jspë¡œ ì´ë™
+		ModelAndView mv = new ModelAndView();
+		// ì—¬ê¸°ì„œ ìƒˆë¡œìš´ ì±… ì •ë³´(newBook)ë¥¼ ì²˜ë¦¬í•˜ê³  ì±… ëª©ë¡ í˜ì´ì§€ë¡œ ì´ë™í•˜ëŠ” ì½”ë“œ ì‘ì„±
+		mv.addObject("listOfBooks", listOfBooks);
+		// mv.setViewName("books");
+		mv.setViewName("test"); // í™ˆ í˜ì´ì§€ë¡œ ì´ë™
+		
+		mv.addObject("listOfBooks", listOfBooks);
+		
+		return mv;
+	}
+	
+	
+	
+	// ìì„¸íˆ ë³´ê¸°
+    public Book getBookById(String bookId) {
+        return listOfBooks.stream()
+                          .filter(book -> book.getBookId().equals(bookId))
+                          .findFirst()
+                          .orElse(null);
+    }
+	// ìì„¸íˆ ë³´ê¸° - @PathVariable ëŒ€ì‹ í•´ì„œ @RequestParam ì‚¬ìš©
+    @GetMapping("/book.do")
+    public ModelAndView getBookDetail(@RequestParam("id") String bookId) {
+        ModelAndView mv = new ModelAndView();
+        Book book = getBookById(bookId);
+        
+        // book ë‚´ìš© ì¶œë ¥ : Book [bookId=ISBN1234, name=C# í”„ë¡œê·¸ë˜ë°, unitPrice=27000, author=ìš°ì¬ë‚¨, 
+        // 				description=C#ì„ ì²˜ìŒ ì ‘í•˜ëŠ” ë…ìë¥¼ ëŒ€ìƒìœ¼ë¡œ ì¼ëŒ€ì¼ ìˆ˜ì—…ì²˜ëŸ¼ ìì„¸íˆ ì„¤ëª…í•œ ì±…ì´ë‹¤. ê¼­ ì•Œì•„ì•¼ í•  í•µì‹¬ ê°œë…ì€ ê¸°ë³¸ ì˜ˆì œë¡œ ìµœëŒ€í•œ ì‰½ê²Œ ì„¤ëª…í–ˆìœ¼ë©°, 
+        // 				ì¤‘ìš”í•œ ë‚´ìš©ì€ ì‘ìš© ì˜ˆì œ, í€´ì¦ˆ, ì…€í”„ ìŠ¤í„°ë””, ì˜ˆì œ ëª¨ìŒìœ¼ë¡œ í•œë²ˆ ë” ë³µìŠµí•  ìˆ˜ ìˆë‹¤., publisher=í•œë¹›ì•„ì¹´ë°ë¯¸, 
+        // 				category=ITëª¨ë°”ì¼, unitsInStock=1000, releaseDate=2022/10/06, condition=null]
+        System.out.println("book ë‚´ìš© ì¶œë ¥ : " + book);
+        
+        mv.addObject("book", book);
+        mv.setViewName("bookDetail");
+        return mv;
+    }
 }

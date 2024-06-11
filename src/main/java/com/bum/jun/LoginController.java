@@ -10,8 +10,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
 	
 	/**
-	 * ·Î±×ÀÎ Æû 
-	 * @return ½Å¹üÁØ
+	 * ë¡œê·¸ì¸ í¼
+	 * @return ì‹ ë²”ì¤€
 	 */
 	@GetMapping("/login.do")
 	public ModelAndView loginForm() {
@@ -23,12 +23,39 @@ public class LoginController {
 	} 
 	
 	/**
-	 * ·Î±×ÀÎ 
+	 * íšŒì›ê°€ì… í¼
+	 * @return ì‹ ë²”ì¤€
+	 */
+	@GetMapping("/form01.do")
+	public ModelAndView loginForm1() {
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("form01");
+		
+		return mv;
+	} 
+
+	/**
+	 *  ë¶ í˜ì´ì§€ë¡œ
+	 * @return ì‹ ë²”ì¤€
+	 */
+	@GetMapping("/addBook.do")
+	public ModelAndView addBook() {
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("addBook");
+		
+		return mv;
+	} 
+	
+	
+	/**
+	 * ë¡œê·¸ì¸ í¼
 	 * id, passwd -> 
 	 * 
-	 * @RequestParam("id") »ı·« °¡´É
+	 * @RequestParam("id") ìƒëµ ê°€ëŠ¥
 	 * 
-	 * @return ½Å¹üÁØ
+	 * @return ì‹ ë²”ì¤€
 	 */
 	@PostMapping("/login.do")
 	public ModelAndView loginProcess(String id, String passwd) {
@@ -39,21 +66,23 @@ public class LoginController {
 		System.out.println("passwd : " + passwd);
 		
 		if(!(Logincheck(id, passwd) == 1)) {
-			System.out.println("·Î±×ÀÎÀÌ ½ÇÆĞµÇ¾ú½À´Ï´Ù");
-			mv.addObject("message", "@@@@@@@@@@@@@@@@@·Î±×ÀÎÀÌ ½ÇÆĞµÇ¾ú½À´Ï´Ù");
+			System.out.println("ë¡œê·¸ì¸ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤");
+			mv.addObject("message", "ë¡œê·¸ì¸ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤");
+			mv.addObject("success", "-1");
 			mv.setViewName("loginResult");
 			return mv;
 		}
 		
-		System.out.println("·Î±×ÀÎÀÌ ¼º°øµÇ¾ú½À´Ï´Ù");
-		mv.addObject("message", "@@@@@@@@@@@@@@@@@·Î±×ÀÎÀÌ ¼º°øµÇ¾ú½À´Ï´Ù");
+		System.out.println("ë¡œê·¸ì¸ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤");
+		mv.addObject("message", "ë¡œê·¸ì¸ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤");
+		mv.addObject("success", "1");
 		mv.setViewName("loginResult");
 		
 		return mv;
 	}
 	
 	public int Logincheck(String id, String passwd) {
-		if ("s123s123s".equals(id) && "1512".equals(passwd)) { // ¹®ÀÚ¿­ ºñ±³´Â equals
+		if ("s123s123s".equals(id) && "1512".equals(passwd)) {
 			return 1;
 		}
 		return -1;

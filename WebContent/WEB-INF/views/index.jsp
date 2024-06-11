@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.Date"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,12 +29,7 @@
 	    	String greeting = "Welcome to Book Shopping Mall";
    			String tagline = "저희 매장에 오신것을 환영합니다!!";
    		%>
-	   		 <div class="p-5 mb-4 bg-body-tertiary rounded-3">
-		      <div class="container-fluid py-5">
-		        <h1 class="display-5 fw-bold"><%=greeting%></h1>
-		        <p class="col-md-8 fs-4">BookMarket</p>      
-		      </div>
-		    </div>
+
 		    <div class="row align-items-md-stretch   text-center">
 		      <div class="col-md-12">
 		        <div class="h-100 p-5">
@@ -62,10 +58,35 @@
 						      </div>   
 				    		</div>   
 				    		
+				    		
 		        </div>
 		      </div>   
 		    </div> 
-		    
+   
+			   <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+			      <div class="container-fluid py-5">
+			        <h1 class="display-5 fw-bold">도서목록</h1>
+			        <p class="col-md-8 fs-4">BookList</p>      
+			      </div>
+			    </div>
+
+						<div class="row align-items-md-stretch text-center">
+						<c:forEach items="${listOfBooks}" var="book">
+						    <div class="col-md-4">
+						        <div class="h-100 p-2">         
+						            <h5><b>${book.name}</b></h5>
+						            <img src="<c:out value='${book.imageUrl}' />" class="img-fluid rounded-start" alt="<c:out value='${book.name}' />">
+						            <p>${book.publisher} | ${book.unitPrice}원</p>
+						            <!-- p>${book.description.substring(0, 60)}...</p-->
+						            
+						            <p>${book.unitPrice}원</p>
+						            <p><a href="./book.do?id=${book.bookId}" class="btn btn-secondary" role="button"> 상세 정보 &raquo;</a></p>
+						        </div>   
+						    </div>
+						</c:forEach>
+			                
+			    </div>
+      
 		    <!-- footer class="pt-3 mt-4 text-body-secondary border-top">
 		      &copy; BookMarket
 		    </footer -->

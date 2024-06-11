@@ -14,11 +14,19 @@
       String password = request.getParameter("passwd");
       // 이 메서드는 서블릿이나 다른 서버 측 코드에서 설정한 속성을 가져옵니다, Object (형변환 필요)
       String message = (String) request.getAttribute("message");
+      String success = (String) request.getAttribute("success");
    %>
    <p>아이디 : <%=userid%>
    <p>비밀번호 : <%=password%>
    <p><%=message%></p>
    
+   <% if ("1".equals(success)) { %>
+   		<p>로그인 했을때만 보이는 태그 >>>>> <a href="./books.do">북으로 이동</a></p>
+   		<p>북 추가하는 태그 >>>>> <a href="./addBook.do">북 추가하기 위해서 이동</a></p>
+   <% }else{ %>
+   		<p>로그인에 실패하였습니다. 다시 시도하려면 <a href="./login.do">여기</a>를 클릭하세요.</p>
+   <% } %>
+   		
     <%
        request.setCharacterEncoding("utf-8");
        String name = request.getParameter("name");

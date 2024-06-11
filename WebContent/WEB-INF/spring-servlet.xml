@@ -16,6 +16,11 @@
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
 
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 최대 업로드 가능 용량을 설정 (예: 5MB) -->
+        <property name="maxUploadSize" value="5242880"/>
+    </bean>
+
 	<!-- JSP 뷰 리졸버 설정 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/"/>
