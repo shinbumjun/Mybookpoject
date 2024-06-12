@@ -27,5 +27,9 @@
             </c:forEach>
         </tbody>
     </table>
+    
+    <a href="./index.do">홈으로 돌아가기</a>
+    <a href="./login.do">로그인</a>
+    
 </body>
 </html>

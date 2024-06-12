@@ -106,8 +106,6 @@ public class BookRepository {
 		// mv.setViewName("books");
 		mv.setViewName("test"); // 홈 페이지로 이동
 		
-		mv.addObject("listOfBooks", listOfBooks);
-		
 		return mv;
 	}
 	
