@@ -1,6 +1,7 @@
 package com.dto;
 
 import java.io.Serializable;
+import org.springframework.web.multipart.MultipartFile;
 
 public class Book implements Serializable {
 
@@ -17,6 +18,7 @@ public class Book implements Serializable {
     private String releaseDate;     // 출판일
     private String condition;       // 상태(New, Old, EBook)
     private String imageUrl;        // 이미지 URL 추가
+    private transient MultipartFile image;  // MultipartFile 필드 추가
 
     public Book() {
         super();
@@ -115,6 +117,14 @@ public class Book implements Serializable {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public MultipartFile getImage() {
+        return image;
+    }
+
+    public void setImage(MultipartFile image) {
+        this.image = image;
     }
 
     @Override

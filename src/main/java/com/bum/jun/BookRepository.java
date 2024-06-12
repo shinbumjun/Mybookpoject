@@ -1,7 +1,14 @@
 package com.bum.jun;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -10,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dto.Book;
@@ -86,25 +94,60 @@ public class BookRepository {
 	 * category 분류
 	 * unitsInStock 재고수 
 	 * condition 상태(New, Old, EBook)
+	 * imageUrl 이미지(경로)
 	 * 
 	 * Book Dto 생성
 	 * 
 	 * @return 신범준
 	 */
-	@PostMapping("/processAddBook.do")
-	public ModelAndView processAddBook(@ModelAttribute Book newBook) {
-		// 새로운 책을 목록에 추가
-	    listOfBooks.add(newBook);
+	// @ModelAttribute는 MultipartFile을 자동으로 매핑할 수 없기 때문에, 이미지 파일을 개별적으로 받고 이를 Book 객체에 설정하는 과정이 필요
+	// 생략 @RequestParam("image") MultipartFile image
+	@PostMapping("/processAddBook.do") 
+	public ModelAndView processAddBook(@ModelAttribute Book newBook, HttpServletRequest request) {
+		
+	    // image=1.jpg 이미지 받아오기
+	    MultipartFile image = newBook.getImage();
+	    // MultipartFile[field="image", filename=1.jpg, contentType=image/jpeg, size=11366]
+	    System.out.println("image 받아온 정보" + image); 
 	    
+
+	    // 이미지 파일을 처리합니다.
+	    if (image != null && !image.isEmpty()) {
+	        try {
+	            // 파일 저장 경로 설정 (실제 경로)
+	            String uploadDir = "C:\\Users\\user\\minibumjun\\JSPBook\\WebContent\\resources\\images\\";
+	            String imageName = image.getOriginalFilename();
+	            Path path = Paths.get(uploadDir + imageName);
+	            
+	            // 경로 확인
+	            System.out.println("path 정보 확인" + path);
+	            
+	            // 파일 저장
+	            Files.createDirectories(path.getParent()); // 디렉토리가 존재하지 않으면 생성
+	            Files.write(path, image.getBytes());
+	            
+	            // Book 객체에 이미지 URL 설정
+	            newBook.setImageUrl("./resources/images/" + imageName);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    
+	    
+	    // Book [bookId=100, name=신범준, unitPrice=10000, author=신범준, description=이미지 파일 추가해보겠습니다, publisher=한빛, 
+	    //       category=판타지, unitsInStock=8, releaseDate=10월, condition=New , imageUrl=/resources/images/1.jpg]
 	    System.out.println("@@@@@@추가 데이터@@@@@@" + newBook); // ok
-	    System.out.println("@@@@@@전체 데이터@@@@@@" + listOfBooks); 
+	    System.out.println("@@@@@@전체 데이터@@@@@@" + listOfBooks); // 잘 출력되는 것은 -> ./resources/images/prod1.jpg
+	    
+	    // 새로운 책을 목록에 추가
+	    listOfBooks.add(newBook);
 	    
 	    // 목록을 모델에 담아서 books.jsp로 이동
 		ModelAndView mv = new ModelAndView();
 		// 여기서 새로운 책 정보(newBook)를 처리하고 책 목록 페이지로 이동하는 코드 작성
 		mv.addObject("listOfBooks", listOfBooks);
 		// mv.setViewName("books");
-		mv.setViewName("test"); // 홈 페이지로 이동
+		mv.setViewName("index"); // 홈 페이지로 이동
 		
 		return mv;
 	}
