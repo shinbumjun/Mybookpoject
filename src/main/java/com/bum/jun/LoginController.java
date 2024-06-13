@@ -23,19 +23,6 @@ public class LoginController {
 	} 
 	
 	/**
-	 * 회원가입 폼
-	 * @return 신범준
-	 */
-	@GetMapping("/form01.do")
-	public ModelAndView loginForm1() {
-		
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("form01");
-		
-		return mv;
-	} 
-
-	/**
 	 *  북 페이지로
 	 * @return 신범준
 	 */
@@ -47,6 +34,7 @@ public class LoginController {
 		
 		return mv;
 	} 
+	
 	
 	
 	/**
@@ -77,6 +65,36 @@ public class LoginController {
 		mv.addObject("message", "로그인에 성공했습니다");
 		mv.addObject("success", "1");
 		mv.setViewName("loginResult");
+		
+		return mv;
+	}
+	
+	
+	
+	
+	/**
+	 * 회원가입 폼
+	 * @return 신범준
+	 */
+	@GetMapping("/form01.do")
+	public ModelAndView loginForm1() {
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("form01");
+		
+		return mv;
+	} 
+	
+	/**
+	 * 
+	 * @param id
+	 * @param passwd
+	 * @return 회원가입
+	 */
+	@PostMapping("/signup.do")
+	public ModelAndView registerMember() {
+		
+		ModelAndView mv = new ModelAndView();
 		
 		return mv;
 	}

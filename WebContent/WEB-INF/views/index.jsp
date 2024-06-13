@@ -70,34 +70,33 @@
 			      </div>
 			    </div>
 
-						<div class="row align-items-md-stretch text-center">
-						<c:forEach items="${listOfBooks}" var="book">
-						    <div class="col-md-4">
-						        <div class="h-100 p-2">         
-						            <h5><b>${book.name}</b></h5>
-						            
-						            <img src="<c:out value='${book.imageUrl}' />" class="img-fluid rounded-start" alt="<c:out value='${book.name}' />">
-						            
-						            <p>${book.publisher} | ${book.unitPrice}원</p>
-						                <!-- 설명 부분을 조건부로 출력, 스타일 속성을 사용하여 긴 단어가 자동으로 줄바꿈 -->
-						                <c:choose>
-										    <c:when test="${book.description.length() >= 60}">
-										        <p style="word-wrap: break-word;">
-										            ${book.description.substring(0, 60)}...<br>
-										        </p>
-										    </c:when>
-										    <c:otherwise>
-										        <p style="word-wrap: break-word;">${book.description}</p>
-										    </c:otherwise>
-						                </c:choose>
-						            <p>${book.unitPrice}원</p>
-						            <p><a href="./book.do?id=${book.bookId}" class="btn btn-secondary" role="button"> 상세 정보 &raquo;</a></p>
-						        </div>   
-						    </div>
-						</c:forEach>
-
-			                
-			    </div>
+										<div class="row align-items-md-stretch text-center">
+										<c:forEach items="${listOfBooks}" var="book">
+										    <div class="col-md-4">
+										        <div class="h-100 p-2">         
+										            <h5><b>${book.name}</b></h5>
+										            
+										            <!-- img src="<c:out value='${book.imageUrl}' />" class="img-fluid rounded-start" alt="<c:out value='${book.name}' />" -->
+										            <img src="<c:url value='/${book.imageUrl}' />" class="img-fluid rounded-start" alt="${book.name}">
+										            
+										            <p>${book.publisher} | ${book.unitPrice}원</p>
+										                <!-- 설명 부분을 조건부로 출력, 스타일 속성을 사용하여 긴 단어가 자동으로 줄바꿈 -->
+										                <c:choose>
+														    <c:when test="${book.description.length() >= 60}">
+														        <p style="word-wrap: break-word;">
+														            ${book.description.substring(0, 60)}...<br>
+														        </p>
+														    </c:when>
+														    <c:otherwise>
+														        <p style="word-wrap: break-word;">${book.description}</p>
+														    </c:otherwise>
+										                </c:choose>
+										            <p>${book.unitPrice}원</p>
+										            <p><a href="./book.do?id=${book.bookId}" class="btn btn-secondary" role="button"> 상세 정보 &raquo;</a></p>
+										        </div>   
+										    </div>
+										</c:forEach>
+								</div>
       
 		    <!-- footer class="pt-3 mt-4 text-body-secondary border-top">
 		      &copy; BookMarket

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!-- 추가적인 설정들을 넣을 수 있음 -->
+    
+    <!-- 자동으로 CamelCase 매핑 -->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+    
+    <!-- Type Alias 설정 -->
+    <typeAliases>
+        <!-- 패키지를 스캔하여 등록할 경우 -->
+        <package name="com.dao"/>
+        
+        <!-- 개별적으로 타입을 등록할 경우 -->
+        <!-- <typeAlias alias="Member" type="com.example.model.Member"/> -->
+    </typeAliases>
+    
+    <!-- 매퍼 파일 위치 설정 -->
+    <mappers>
+        <mapper resource="sql/SQL.Member.xml"/>
+        <!-- 다른 매퍼 파일들을 추가할 수 있음 -->
+    </mappers>
+    
+</configuration>

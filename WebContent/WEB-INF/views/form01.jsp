@@ -5,7 +5,7 @@
 </head>
 <body>
    <h3>회원가입</h3>
-	   <form action="#" name="member" method="post">
+	   <form action="./signup.do" name="member" method="post">
 	      <p>아이디 : <input type="text" name="id"> 
 	      			<input type="button" value="아이디 중복검사">
 	      			

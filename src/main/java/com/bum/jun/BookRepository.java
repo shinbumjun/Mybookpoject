@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,6 +112,8 @@ public class BookRepository {
 	    // MultipartFile[field="image", filename=1.jpg, contentType=image/jpeg, size=11366]
 	    System.out.println("image 받아온 정보" + image); 
 	    
+	    // imageUrl=./resources/images/galic.jpg
+	    // imageUrl=./resources/images/prod2.jpg
 
 	    // 이미지 파일을 처리합니다.
 	    if (image != null && !image.isEmpty()) {
@@ -118,24 +122,25 @@ public class BookRepository {
 	            String uploadDir = "C:\\Users\\user\\minibumjun\\JSPBook\\WebContent\\resources\\images\\";
 	            String imageName = image.getOriginalFilename();
 	            Path path = Paths.get(uploadDir + imageName);
-	            
+
 	            // 경로 확인
 	            System.out.println("path 정보 확인" + path);
-	            
+
 	            // 파일 저장
 	            Files.createDirectories(path.getParent()); // 디렉토리가 존재하지 않으면 생성
 	            Files.write(path, image.getBytes());
-	            
+
 	            // Book 객체에 이미지 URL 설정
-	            newBook.setImageUrl("./resources/images/" + imageName);
+	            newBook.setImageUrl("./resources/images/" + imageName); 
+	         // ./resources/images/1.jpg
+	            System.out.println("@@@@@@@@@@@@@@@" + newBook.getImageUrl());
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
 	    }
-	    
-	    
+
 	    // Book [bookId=100, name=신범준, unitPrice=10000, author=신범준, description=이미지 파일 추가해보겠습니다, publisher=한빛, 
-	    //       category=판타지, unitsInStock=8, releaseDate=10월, condition=New , imageUrl=/resources/images/1.jpg]
+	    //       category=판타지, unitsInStock=8, releaseDate=10월, condition=New , imageUrl=./resources/images/1.jpg]
 	    System.out.println("@@@@@@추가 데이터@@@@@@" + newBook); // ok
 	    System.out.println("@@@@@@전체 데이터@@@@@@" + listOfBooks); // 잘 출력되는 것은 -> ./resources/images/prod1.jpg
 	    
