@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,7 @@
         </tr>
         <tr>
         <td colspan="5">
-            <button type="button" value="신규 글 작성" onClick="location.href='post_new.jsp'">신규 글 작성</button>
+            <button type="button" value="신규 글 작성" onClick="location.href='./writePost.do'">신규 글 작성</button>
           </td>
         </tr>
         <tr>
@@ -29,6 +30,20 @@
           <td>작성일</td>
           <td>관리</td>
         </tr>
+        
+                <c:forEach var="post" items="${postList}">
+		            <tr>
+		                <td>${post.num}</td>
+		                <td>${post.writer}</td>
+		                <td><a href="readPost.do?num=${post.num}">${post.title}</a></td>
+		                <td>${post.regDate}</td>
+		                <td>
+		                    <a href="editPost.do?num=${post.num}">수정</a> | 
+		                    <a href="deletePost.do?num=${post.num}">삭제</a>
+		                </td>
+		            </tr>
+		        </c:forEach>
+        
     </table>
     
 </body>

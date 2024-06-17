@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.bum.jun.dao.BoardDao">
+	
+	<!-- 
+		게시글 쓰기
+		int createPost(PostDto postDto);
+ 	-->
+    <insert id="createPost" parameterType="PostDto">
+		INSERT INTO testdb.post (title, writer, content, reg_date)
+        VALUES (#{title}, #{writer}, #{content}, DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s'));
+    </insert>
+    
+    <!-- 
+    	게시글 리스트
+    	PostDto getPostList();
+     -->
+     <select id="getPostList" resultType="PostDto">
+     	SELECT num, title, writer, content, reg_date
+		FROM testdb.post;
+     </select>
+     
+</mapper>
+
+
+
+

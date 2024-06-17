@@ -1,12 +1,22 @@
 package com.bum.jun;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.bum.jun.dto.PostDto;
+import com.bum.jun.service.BoardService;
 
 @Controller
 public class BoardController {
 
+	@Autowired
+	BoardService BService;
+	
 	/**
 	 * 게시판 이동
 	 * @return 신범준
@@ -28,12 +38,58 @@ public class BoardController {
 	public ModelAndView boardList() {
 		
 		ModelAndView mv = new ModelAndView();
+		
+		// 게시글 리스트
+		List<PostDto> postList = BService.getPostList();
+		System.out.println("게시글 리스트 : " + postList);
+		
+		mv.addObject("postList", postList);
 		mv.setViewName("boardList");
 		
 		return mv;
 	} 
 	
+	/**
+	 * 신규 글 작성
+	 * 
+	 * @return 신범준
+	 */
+	@GetMapping("/writePost.do")
+	public ModelAndView writePost() {
+		
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("writePost");
+		
+		return mv;
+	} 
 	
-	
-	
+	/**
+	 * 게시글 작성
+	 * @return 신범준
+	 */
+	@PostMapping("/createPost.do")
+	public ModelAndView createPost(PostDto postDto) {
+		ModelAndView mv = new ModelAndView();
+		
+		// PostDto [num=0, title=제목, writer=작성자, content=내용, regDate=null]
+		System.out.println("게시글 작성 : " + postDto);
+		int cnt = BService.createPost(postDto);
+		
+		if(!(cnt == 1)) {
+			System.out.println("게시글 실패 성공 : " + cnt);
+		}
+		
+		// 게시글 리스트
+		List<PostDto> postList = BService.getPostList();
+		System.out.println("게시글 리스트 : " + postList);
+		
+		mv.addObject("postList", postList);
+		mv.setViewName("boardList");
+		return mv;
+	} 
 }
+
+
+
+
+
