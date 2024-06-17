@@ -6,23 +6,41 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.bum.jun.dao.BoardDao">
 	
 	<!-- 
-		게시글 쓰기
-		int createPost(PostDto postDto);
+			게시글 쓰기
+			int createPost(PostDto postDto);
  	-->
     <insert id="createPost" parameterType="PostDto">
-		INSERT INTO testdb.post (title, writer, content, reg_date)
-        VALUES (#{title}, #{writer}, #{content}, DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s'));
+			INSERT INTO testdb.post (title, writer, content, reg_date)
+	        VALUES (#{title}, #{writer}, #{content}, DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s'));
     </insert>
     
     <!-- 
-    	게시글 리스트
-    	PostDto getPostList();
+	    	게시글 리스트
+	    	PostDto getPostList();
      -->
      <select id="getPostList" resultType="PostDto">
-     	SELECT num, title, writer, content, reg_date
-		FROM testdb.post;
+	     	SELECT num, title, writer, content, reg_date
+			FROM testdb.post;
      </select>
      
+     <!-- 
+     		PostDto readPost(int num);
+      -->
+      <select id="readPost" parameterType="int" resultType="PostDto">
+	     	SELECT num, title, writer, content, reg_date
+			FROM testdb.post
+			where num=#{num};
+     </select>
+      
+     <!-- 
+	     	게시글 삭제
+	     	int deletePost(int num);
+      -->
+      <delete id="deletePost" parameterType="int">
+		    DELETE FROM testdb.post
+		    WHERE num = #{num}
+		</delete>
+      
 </mapper>
 
 

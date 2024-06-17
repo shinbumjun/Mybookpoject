@@ -64,6 +64,25 @@ public class BoardController {
 	} 
 	
 	/**
+	 * readPost.do?num=${post.num}
+	 * 
+	 * @return 신범준
+	 */
+	@GetMapping("/readPost.do")
+	public ModelAndView readPost(int num) {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		System.out.println("게시판 번호 : " + num);
+		PostDto read = BService.readPost(num);
+		
+		mv.addObject("read", read);
+		mv.setViewName("readPost");
+		
+		return mv;
+	} 
+	
+	/**
 	 * 게시글 작성
 	 * @return 신범준
 	 */
@@ -87,9 +106,35 @@ public class BoardController {
 		mv.setViewName("boardList");
 		return mv;
 	} 
+	
+	/**
+	 * 게시글 삭제 처리
+	 */
+	@GetMapping("/deletePost.do")
+	public ModelAndView deletePost(int num) {
+	    ModelAndView mv = new ModelAndView();
+	    int cnt = BService.deletePost(num);
+	    
+	    if (cnt != 1) {
+	        System.out.println("게시글이 삭제되지 않았습니다: " + cnt);
+	        mv.addObject("msg", "게시글이 삭제되지 않았습니다");
+	    } else {
+	        System.out.println("게시글이 삭제 되었습니다: " + cnt);
+	        mv.addObject("msg", "게시글이 삭제되었습니다");
+	    }
+	    
+	    System.out.println("게시글이 삭제 되었습니다" + cnt);
+	    
+	    // 삭제 후 게시글 리스트 다시 조회
+	    List<PostDto> postList = BService.getPostList();
+	    mv.addObject("postList", postList);
+	    mv.setViewName("boardList");
+	    return mv;
+	}
+	
+	
+	
+	
 }
-
-
-
 
 

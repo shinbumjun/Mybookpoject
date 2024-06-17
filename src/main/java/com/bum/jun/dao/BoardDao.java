@@ -10,4 +10,8 @@ public interface BoardDao {
 
 	List<PostDto> getPostList();
 
+	PostDto readPost(int num);
+
+	int deletePost(int num);
+
 }

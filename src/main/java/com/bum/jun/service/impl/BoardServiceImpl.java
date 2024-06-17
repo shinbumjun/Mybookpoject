@@ -28,4 +28,20 @@ public class BoardServiceImpl implements BoardService {
 		return list;
 	}
 
+	@Override // 게시글 읽기
+	public PostDto readPost(int num) { 
+		PostDto read = BDao.readPost(num);
+		return read;
+	}
+
+	@Override
+	public int deletePost(int num) {
+		int cnt = BDao.deletePost(num);
+		return cnt;
+	}
 }
+
+
+
+
+

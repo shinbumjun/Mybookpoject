@@ -10,4 +10,8 @@ public interface BoardService {
 
 	List<PostDto> getPostList(); // 게시글 리스트
 
+	PostDto readPost(int num); // 게시글 읽기
+
+	int deletePost(int num); // 게시글 삭제
+
 }
