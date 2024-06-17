@@ -1,24 +1,31 @@
 package com.bum.jun;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.bum.jun.dto.UserDto;
+import com.bum.jun.service.LoginService;
+
 @Controller
 public class LoginController {
 	
+	@Autowired
+	LoginService lService;
+	
 	/**
-	 * 로그인 폼
+	 * 로그인 폼 
 	 * @return 신범준
+	 * username -> username
+	 * password -> password
 	 */
 	@GetMapping("/login.do")
 	public ModelAndView loginForm() {
-		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("login");
-		
 		return mv;
 	} 
 	
@@ -38,43 +45,41 @@ public class LoginController {
 	
 	
 	/**
-	 * 로그인 폼
+	 * 로그인하기
 	 * id, passwd -> 
 	 * 
 	 * @RequestParam("id") 생략 가능
 	 * 
+	 * username -> username
+	 * password -> password
+	 * 
 	 * @return 신범준
 	 */
 	@PostMapping("/login.do")
-	public ModelAndView loginProcess(String id, String passwd) {
+	public ModelAndView loginProcess(UserDto userdto) {
 		
 		ModelAndView mv = new ModelAndView();
+		System.out.println("로그인 : " + userdto);
 		
-		System.out.println("id : " + id);
-		System.out.println("passwd : " + passwd);
-		
-		if(!(Logincheck(id, passwd) == 1)) {
-			System.out.println("로그인에 실패했습니다");
-			mv.addObject("message", "로그인에 실패했습니다");
+		if(!(Logincheck(userdto) == true)) {
 			mv.addObject("success", "-1");
-			mv.setViewName("loginResult");
+			mv.addObject("msg", "로그인에 실패했습니다");
+			mv.setViewName("login");
 			return mv;
 		}
-		
-		System.out.println("로그인에 성공했습니다");
-		mv.addObject("message", "로그인에 성공했습니다");
 		mv.addObject("success", "1");
-		mv.setViewName("loginResult");
+		mv.addObject("msg", "로그인 성공했습니다");
+		mv.setViewName("board");
 		
 		return mv;
 	}
 	
-	public int Logincheck(String id, String passwd) {
-		if ("s123s123s".equals(id) && "1512".equals(passwd)) {
-			return 1;
-		}
-		return -1;
+	private boolean Logincheck(UserDto userdto) {
+		boolean cnt = lService.Logincheck(userdto);
+		System.out.println("아이디와 비밀번호가 일치하는가 : " + cnt);
+		return cnt;
 	}
+
 }
 
 

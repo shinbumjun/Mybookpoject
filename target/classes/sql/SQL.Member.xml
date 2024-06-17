@@ -4,9 +4,15 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 <mapper namespace="com.bum.jun.dao.MemberDao">
-
-	<select id="select">
-		select count(*)
-		from testdb.user;
-	</select>
+	
+	<!-- 
+		회원 가입 INSERT 쿼리
+		public int signup(UserDto userdto);
+ 	-->
+    <insert id="signup" parameterType="UserDto">
+        INSERT INTO testdb.user
+        (username, password, name, phone, sex, hobby, email, reg_date)
+        VALUES
+        (#{username}, #{password}, #{name}, #{phone}, #{sex}, #{hobby}, #{email}, NOW())
+    </insert>
 </mapper>

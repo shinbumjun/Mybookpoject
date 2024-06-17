@@ -57,10 +57,15 @@ public class MemberController {
 		//          sex=남성, hobby=독서,운동, email=sinbumjun123@naver.com, regDate=null]
 		
 		int cnt = mService.signup(userdto);
-		System.out.println("회원가입이 되었는지 확인 : " + cnt);
 		
+		if(!(cnt == 1)) { // 회원가입 실패
+			mv.setViewName("board");
+			mv.addObject("msg", "회원가입 실패했습니다");
+			return mv;
+		}
 		mv.setViewName("board");
-		
+		mv.addObject("msg", "회원가입 성공했습니다");
 		return mv;
 	} 
 }
+
