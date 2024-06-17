@@ -1,4 +1,4 @@
-package com.dto;
+package com.bum.jun.dto;
 
 import java.io.Serializable;
 import org.springframework.web.multipart.MultipartFile;

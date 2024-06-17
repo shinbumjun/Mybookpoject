@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+h1 {
+    text-align: center;
+    padding: 10px 10px;
+    padding-bottom: 30px;
+    border-bottom:1px solid #848484;
+}
+
+.btn {
+    position: absolute;
+    top:30%;
+    left:40%;
+    background-color:#0a0a23;
+    color: #fff;
+    border:none;
+}
+
+.btn:hover {
+    background-color: #0056b3; /* 호버 시 배경 색상 */
+}
+
+table {
+  border-collapse: collapse;
+  width: 70%;
+  margin: 1rem auto;
+  border: 1.5px solid #ddd;
+  background-color: white;
+}
+
+/* 테이블 행 */
+th, td {
+  padding: 8px;
+  text-align: left;
+  border: 1.5px solid #ddd;
+  text-align: center;
+}
+
+th {
+  background-color: #1b1b1b;
+  color: #ddd;
+}
+
+/* 테이블 비율 */
+th:nth-child(1),
+td:nth-child(1) {
+  width: 10%;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 15%;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  width: 35%;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+  width: 15%;
+}
+
+th:nth-child(5),
+td:nth-child(5) {
+  width: 15%;
+}
+
+input, textarea {
+   width:80%
+}
+
+#b_up {
+   margin-bottom: 5px;
+}
+
+
+
+
+
+

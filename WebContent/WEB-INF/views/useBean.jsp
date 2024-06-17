@@ -17,6 +17,7 @@
 	   <a href="./login.do">로그인</a>
 	   <a href="./form01.do">회원가입</a>
 	   <a href="./Fileupload01.do">파일 업로드</a>
+	   <a href="./board.do">게시판</a>
 
 </body>
 </html>

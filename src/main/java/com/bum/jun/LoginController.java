@@ -69,36 +69,6 @@ public class LoginController {
 		return mv;
 	}
 	
-	
-	
-	
-	/**
-	 * 회원가입 폼
-	 * @return 신범준
-	 */
-	@GetMapping("/form01.do")
-	public ModelAndView loginForm1() {
-		
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("form01");
-		
-		return mv;
-	} 
-	
-	/**
-	 * 
-	 * @param id
-	 * @param passwd
-	 * @return 회원가입
-	 */
-	@PostMapping("/signup.do")
-	public ModelAndView registerMember() {
-		
-		ModelAndView mv = new ModelAndView();
-		
-		return mv;
-	}
-	
 	public int Logincheck(String id, String passwd) {
 		if ("s123s123s".equals(id) && "1512".equals(passwd)) {
 			return 1;
